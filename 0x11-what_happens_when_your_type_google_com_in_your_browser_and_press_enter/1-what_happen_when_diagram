@@ -1,0 +1,69 @@
+       +------------------+
+       |     User's       |
+       |     Browser      |
+       +--------+---------+
+                |
+                | Type "https://www.google.com"
+                v
+       +------------------+
+       |   DNS Resolution |
+       +--------+---------+
+                |
+                | Resolve IP Address
+                v
+       +------------------+
+       |    TCP/IP        |
+       |  Establishes     |
+       |  Connection      |
+       +--------+---------+
+                |
+                | Port 443 (HTTPS)
+                v
+       +------------------+
+       |     Firewall     |
+       +--------+---------+
+                |
+                | Encrypted Traffic (HTTPS/SSL)
+                v
+       +------------------+
+       |  Load Balancer   |
+       +--------+---------+
+                |
+                | Distribute Requests
+                v
+       +------------------+
+       |    Web Server    |
+       +--------+---------+
+                |
+                | Serve Web Page Request
+                v
+       +------------------+
+       | Application      |
+       |    Server        |
+       +--------+---------+
+                |
+                | Generate Web Page
+                v
+       +------------------+
+       |     Database     |
+       +------------------+
+                |
+                | Fetch Data
+                v
+       +------------------+
+       | Application      |
+       |    Server        |
+       +--------+---------+
+                |
+                | Combine Data & Web Page
+                v
+       +------------------+
+       |    Web Server    |
+       +--------+---------+
+                |
+                | Return Web Page
+                v
+       +------------------+
+       |     User's       |
+       |     Browser      |
+       +------------------+

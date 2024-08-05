@@ -1,0 +1,29 @@
+1. DNS Request: Finding Google
+When you hit Enter, the first thing that happens is a DNS (Domain Name System) request. Your browser needs to translate “www.google.com” into an IP address that computers use to communicate. Think of DNS as a phone book for the internet.
+
+Your computer checks its local cache to see if it has recently accessed Google and remembers its IP address. If it doesn’t, the request goes out to a DNS resolver, typically provided by your Internet Service Provider (ISP). The resolver queries other DNS servers in a hierarchical manner until it finds the IP address for Google’s domain.
+
+2. TCP/IP: Establishing a Connection
+With the IP address in hand, your browser uses the TCP/IP (Transmission Control Protocol/Internet Protocol) suite to establish a connection with Google’s servers. TCP/IP is the foundational protocol of the internet, allowing your computer to communicate with other computers.
+
+TCP ensures reliable, ordered, and error-checked delivery of data between your browser and Google’s server. It does this through a handshake process where both parties agree on parameters before data transfer begins.
+IP is responsible for routing data packets to the correct destination based on the IP address.
+3. Firewall: Securing the Path
+As your request travels across the internet, it encounters various firewalls. Firewalls are security systems that monitor and control incoming and outgoing network traffic based on predetermined security rules. They act like gatekeepers, ensuring that only legitimate traffic is allowed through and protecting both your device and Google’s servers from potential threats.
+
+4. HTTPS/SSL: Encrypting the Connection
+Once your connection reaches Google’s servers, it uses HTTPS (HyperText Transfer Protocol Secure) to ensure a secure communication channel. HTTPS is the secure version of HTTP and incorporates SSL (Secure Sockets Layer) or TLS (Transport Layer Security) to encrypt data transmitted between your browser and Google’s servers.
+
+This encryption protects your data from eavesdroppers and ensures that the data integrity is maintained, so no one can alter the information sent between you and Google.
+
+5. Load-Balancer: Distributing the Load
+Google operates a massive infrastructure to handle the enormous volume of requests it receives. A load-balancer sits between your request and Google’s servers, distributing incoming requests across multiple servers to ensure no single server becomes overwhelmed. This helps Google provide fast and reliable responses to all users.
+
+6. Web Server: Serving the Request
+Once the request reaches a Google web server, it processes the request to determine which page to display. The web server’s role is to handle HTTP requests and responses. It fetches the necessary files and data to generate the web page you’ve requested.
+
+7. Application Server: Processing the Request
+Google’s web server then passes the request to the application server. The application server is where the actual processing of your request happens. For a search query, the application server runs complex algorithms to provide relevant search results, taking into account your query and Google’s indexing of the web.
+
+8. Database: Fetching Information
+To deliver search results, the application server queries Google’s database. Google’s database stores a massive amount of indexed web data. The database returns the relevant information, which the application server processes and formats into a search results page
