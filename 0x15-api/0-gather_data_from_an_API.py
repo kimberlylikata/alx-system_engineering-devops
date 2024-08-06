@@ -1,33 +1,27 @@
 #!/usr/bin/python3
-'''Python script that, using this REST API, for a given employee ID,
-returns information about his/her TODO list progress'''
-import json
+"""
+returns information about his/her TODO list progress.
+"""
 import requests
-import sys
+from sys import argv
 
-
-def main():
-    '''Entry point to the module'''
-    todo_url = 'https://jsonplaceholder.typicode.com/todos/'
-    user_url = 'https://jsonplaceholder.typicode.com/users/'
-    id = sys.argv[1]
-    todo_responce = requests.get(todo_url, params={'userId': id})
-    user_responce = requests.get(user_url + id)
-    user_json = json.loads(user_responce.text)
-    todo_json = json.loads(todo_responce.text)
-    user_name = user_json["name"]
-    total_number_of_tasks = len(todo_json)
-    number_of_done_tasks = 0
-    for i in range(total_number_of_tasks):
-        if todo_json[i]['completed']:
-            number_of_done_tasks += 1
-    print('Employee {} is done with tasks({}/{}):'.format(
-        user_name, number_of_done_tasks, total_number_of_tasks
-        ))
-    for i in range(total_number_of_tasks):
-        if todo_json[i]['completed']:
-            print('\t ' + todo_json[i]['title'])
-
-
-if __name__ == '__main__':
-    main()
+if __name__ == "__main__":
+    if len(argv) > 1:
+        userId = argv[1]
+        url = "https://jsonplaceholder.typicode.com/"
+        req = requests.get("{}users/{}".format(url, userId))
+        employeeName = req.json().get("name")
+        if employeeName is not None:
+            treq = requests.get(
+                "{}todos?userId={}"
+                .format(url, userId)).json()
+            totalTaskCount = len(treq)
+            doneTasks = []
+            for i in treq:
+                if i.get("completed") is True:
+                    doneTasks.append(i)
+            doneTasksCount = len(doneTasks)
+            print("Employee {} is done with tasks({}/{}):"
+                  .format(employeeName, doneTasksCount, totalTaskCount))
+            for title in doneTasks:
+                print("\t {}".format(title.get("title")))

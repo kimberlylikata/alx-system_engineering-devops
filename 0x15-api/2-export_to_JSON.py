@@ -1,43 +1,23 @@
 #!/usr/bin/python3
-"""
-Exports to-do list information for a given employee ID to JSON format.
-
-This script takes an employee ID as a command-line argument and exports
-the corresponding user information and to-do list to a JSON file.
-"""
+'''
+Export data in the JSON format.
+'''
 
 import json
 import requests
-import sys
+from sys import argv
 
-
-if __name__ == "__main__":
-    # Get the employee ID from the command-line argument
-    user_id = sys.argv[1]
-
-    # Base URL for the JSONPlaceholder API
-    url = "https://jsonplaceholder.typicode.com/"
-
-    # Fetch user information using the provided employee ID
-    user = requests.get(url + "users/{}".format(user_id)).json()
-    username = user.get("username")
-
-    # Fetch the to-do list for the employee using the provided employee ID
-    params = {"userId": user_id}
-    todos = requests.get(url + "todos", params).json()
-
-    # Create a dictionary containing the user and to-do list information
-    data_to_export = {
-        user_id: [
-            {
-                "task": t.get("title"),
-                "completed": t.get("completed"),
-                "username": username
-            }
-            for t in todos
-        ]
-    }
-
-    # Write the data to a JSON file with the employee ID as the filename
-    with open("{}.json".format(user_id), "w") as jsonfile:
-        json.dump(data_to_export, jsonfile, indent=4)
+if __name__ == '__main__':
+    uid = argv[1]
+    url = "https://jsonplaceholder.typicode.com/users/{}".format(uid)
+    user = requests.get(url, verify=False).json()
+    url = "https://jsonplaceholder.typicode.com/todos?userId={}".format(uid)
+    toDo = requests.get(url, verify=False).json()
+    name = user.get('username')
+    i = [{"task": i.get("title"),
+          "username": name,
+          "completed": i.get("completed")} for i in toDo]
+    bj = {}
+    bj[uid] = i
+    with open("{}.json".format(uid), 'w') as filejs:
+        json.dump(bj, filejs)
